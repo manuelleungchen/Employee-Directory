@@ -1,0 +1,18 @@
+#header {
+    background-color: #0B4373;
+    color: white;
+    text-align: center;
+    border-bottom: 5px solid #DCB933;
+}
+
+#searchbar {
+    background-color: whitesmoke;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#searchbar input {
+    width: 400px;
+}
