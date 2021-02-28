@@ -1,28 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.css";
-import Employee from "../Employee/"
 
-class Directory extends Component {
+function Directory(props) {
 
-    render() {
+
+
+    let users = props.results.map(user => {
+        console.log(user);
         return (
-            <article className="container">
-                <header className="row" id="directory-header">
-                    <h5 className="col-2">Image</h5>
-                    <h5 className="col-3">Name</h5>
-                    <h5 className="col-2">Phone</h5>
-                    <h5 className="col-3">Email</h5>
-                    <h5 className="col-2">DOB</h5>
-                </header>
-
-                <div className="employee-list">
-                    <Employee />
-                    <Employee />
-                    <Employee />
-                </div>
-            </article>
+            <section className="row" id="row" key={user.cell}>
+                <img className="col-2" src={user.picture.medium} alt={user.picture.thumbnail}></img>
+                <p className="col-3">{user.name.first} {user.name.last}</p>
+                <p className="col-2">{user.phone}</p>
+                <a className="col-3" href="{user.email}">{user.email}</a>
+                <p className="col-2">{user.dob.date}</p>
+            </section>
         )
-    }
+    })
+
+    return (
+        <article className="container">
+            <header className="row" id="directory-header">
+                <h5 className="col-2">Image</h5>
+                <h5 className="col-3">Name</h5>
+                <h5 className="col-2">Phone</h5>
+                <h5 className="col-3">Email</h5>
+                <h5 className="col-2">DOB</h5>
+            </header>
+
+            <div className="employee-list">
+                {users}
+            </div>
+        </article>
+    )
 }
 
 export default Directory;

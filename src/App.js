@@ -1,10 +1,8 @@
 import './App.css';
 import Header from "./components/Header";
-
 import Directory from "./components/Directory";
 import { Component } from 'react';
 import API from "./utils/API";
-
 
 
 class App extends Component {
@@ -16,14 +14,14 @@ class App extends Component {
     
       // When this component mounts, search the Giphy API for pictures of kittens
       componentDidMount() {
-        this.searchGiphy();
+        this.searchRandomUsers();
       }
     
-      searchGiphy = () => {
+      searchRandomUsers = () => {
         API.search("?results=10")
           .then(res => {
-            this.setState({ results: res })
-            console.log(res)
+            this.setState({ results: res.data.results })
+            // console.log(res.data.results)
           })
           .catch(err => console.log(err));
       };
@@ -47,7 +45,7 @@ class App extends Component {
         return (
             <article>
                 <Header />
-                <Directory />
+                <Directory results={this.state.results}/>
             </article>
         );
     }
