@@ -5,7 +5,7 @@
 ## Description  
 Employee Directory Application built with [React](https://reactjs.org/) that generates a list of random users with [Random User API](https://randomuser.me/) and allow sorting and searching users on the list.
 
-![Screenshot](public/src/components/images/Employee-Dir.png)
+![Screenshot](./src/components/images/Employee-Dir.png)
     
 ## Table of Contents   
 * [User Story](#User-Story)
