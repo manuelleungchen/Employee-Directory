@@ -15,29 +15,38 @@ function Directory(props) {
 
         return (
             // Create section element for each user
-            <section className="row" id="row" key={user.id}>
-                <img className="col-2" src={user.picture} alt={user.fullname} ></img>
-                <p className="col-3" >{user.fullname}</p>
-                <p className="col-2" >{phone}</p>
-                <a className="col-3" href={user.email} >{user.email}</a>
-                <p className="col-2" >{dob}</p>
-            </section>
+            <tr key={user.id}>
+                <td><img src={user.picture} alt={user.fullname} ></img></td>
+                <td>
+                    <p>{user.fullname}</p>
+                </td>
+                <td>
+                    <p>{phone}</p>
+                </td>
+                <td><a href={user.email} >{user.email}</a></td>
+                <td>
+                    <p>{dob}</p>
+                </td>
+            </tr>
         )
     })
 
     return (
         <article className="container">
-            <header className="row" id="directory-header">
-                <h5 className="col-2">Image</h5>
-                <h5 className="col-3" onClick={props.sortByName} >Name</h5>
-                <h5 className="col-2" onClick={props.sortByPhone}>Phone</h5>
-                <h5 className="col-3" onClick={props.sortByEmail}>Email</h5>
-                <h5 className="col-2" onClick={props.sortByDOB}>DOB</h5>
-            </header>
-
-            <div className="employee-list">
-                {users}
-            </div>
+            <table className="table table-success table-hover table-striped" id="dir-Table">
+                <thead id="directory-header">
+                    <tr>
+                        <th scope="col"><h5>Picture</h5></th>
+                        <th scope="col" onClick={props.sortByName}><h5>Fullname</h5></th>
+                        <th scope="col" onClick={props.sortByPhone}><h5>Phone</h5></th>
+                        <th scope="col" onClick={props.sortByEmail}><h5>Email</h5></th>
+                        <th scope="col" onClick={props.sortByDOB}><h5>DOB</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users}
+                </tbody>
+            </table>
         </article>
     )
 }

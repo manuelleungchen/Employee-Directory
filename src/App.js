@@ -19,18 +19,18 @@ class App extends Component {
     }
 
     searchRandomUsers = () => {
-        API.search("?results=10")
+        API.search("?results=50")
             .then(res => {
 
                 let formattedData = res.data.results.map(user => {
                     let phone = user.phone.replace(/\D/g, "");
 
                     // Add extra Zeros for incompleted phone number
-                    if(phone.length < 10) {
-                        phone = "0".repeat(10-phone.length) + phone;
+                    if (phone.length < 10) {
+                        phone = "0".repeat(10 - phone.length) + phone;
                     }
                     // Remove international code from phone number
-                    if(phone.length > 10){
+                    if (phone.length > 10) {
                         const interCodeLength = phone.length - 10;
                         phone = phone.slice(interCodeLength, phone.length)
                     }
@@ -45,15 +45,7 @@ class App extends Component {
                     }
                 })
 
-                this.setState({
-                    results: formattedData.sort(
-                        function (a, b) {
-                            var nameA = a.fullname.toUpperCase(); // ignore upper and lowercase
-                            var nameB = b.fullname.toUpperCase(); // ignore upper and lowercase
-                            return (nameA < nameB ? 1 : nameA > nameB ? -1 : 0)
-                        }
-                    )
-                })
+                this.setState({results: formattedData})
             })
             .catch(err => console.log(err));
     };
@@ -61,7 +53,7 @@ class App extends Component {
     handleInputChange = event => {
         const name = event.target.name;
         const value = event.target.value;
-  
+
 
         this.setState({
             [name]: value
@@ -144,7 +136,6 @@ class App extends Component {
                     sortByName={this.sortByName}
                     sortByPhone={this.sortByPhone}
                     sortByDOB={this.sortByDOB}
-                // sort={this.state.sort} 
                 />
             </article>
         );

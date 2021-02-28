@@ -1,8 +1,10 @@
 #header {
-    background-color: #0B4373;
+    padding-top: 20px;
+    background-color: #0b736f;
     color: white;
     text-align: center;
     border-bottom: 5px solid #DCB933;
+    font-family: fantasy, Georgia, 'Times New Roman', Times, serif;
 }
 
 #searchbar {
