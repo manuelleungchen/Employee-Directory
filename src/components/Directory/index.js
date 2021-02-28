@@ -13,10 +13,6 @@ function Directory(props) {
             phone = user.phone
         }
 
-        // else{
-        //     phone = phone.match(/^(\d{3})(\d{3})(\d{4})$/)
-        // }
-
         let dob = user.dob.date.match(/(.{10})/)[0]
 
         return (
@@ -24,7 +20,7 @@ function Directory(props) {
                 <img className="col-2" src={user.picture.medium} alt={user.picture.thumbnail}></img>
                 <p className="col-3">{user.name.first} {user.name.last}</p>
                 <p className="col-2">{phone}</p>
-                <a className="col-3" href="{user.email}">{user.email}</a>
+                <a className="col-3" href="#">{user.email}</a>
                 <p className="col-2">{dob}</p>
             </section>
         )
@@ -34,9 +30,9 @@ function Directory(props) {
         <article className="container">
             <header className="row" id="directory-header">
                 <h5 className="col-2">Image</h5>
-                <h5 className="col-3">Name</h5>
-                <h5 className="col-2">Phone</h5>
-                <h5 className="col-3">Email</h5>
+                <h5 className="col-3" onClick={props.sortByName} >Name</h5>
+                <h5 className="col-2" onClick={props.sortByPhone}>Phone</h5>
+                <h5 className="col-3" onClick={props.sortByEmail}>Email</h5>
                 <h5 className="col-2">DOB</h5>
             </header>
 

@@ -7,74 +7,137 @@ import API from "./utils/API";
 
 class App extends Component {
 
+    // order = false;
+
     state = {
         search: "",
-        results: []
-      };
-    
-      // When this component mounts, search the Giphy API for pictures of kittens
-      componentDidMount() {
+        results: [],
+        ascending: true
+    };
+
+    // When this component mounts, search the Giphy API for pictures of kittens
+    componentDidMount() {
         this.searchRandomUsers();
-      }
-    
-      searchRandomUsers = () => {
+    }
+
+    searchRandomUsers = () => {
         API.search("?results=10")
-          .then(res => {
-            this.setState({ results: res.data.results })
-            // console.log(res.data.results)
-          })
-          .catch(err => console.log(err));
-      };
-    
-      handleInputChange = event => {
+            .then(res => {
+                this.setState({
+                    results: res.data.results.sort(
+
+                        //     function(a, b) {
+                        //     var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
+                        //     var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
+                        //     if (nameA < nameB) {
+                        //       return -1;
+                        //     }
+                        //     if (nameA > nameB) {
+                        //       return 1;
+                        //     }
+
+                        //     // names must be equal
+                        //     return 0;
+                        //   }
+                        function (a, b) {
+                            var nameA = a.email.toUpperCase(); // ignore upper and lowercase
+                            var nameB = b.email.toUpperCase(); // ignore upper and lowercase
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+
+                            // email must be equal
+                            return 0;
+                        }
+                    )
+                })
+            })
+            .catch(err => console.log(err));
+    };
+
+    handleInputChange = event => {
         const name = event.target.name;
         const value = event.target.value;
         console.log(name)
         console.log(value)
 
         this.setState({
-          [name]: value
+            [name]: value
         });
+    };
 
-        // let newResult = this.state.results.filter(user => 
-        //     user.name.first.includes(this.state.search)
-        //     // console.log(user.name.first.includes("a"))
-        // )
+      sortByPhone = () => {
+        this.setState({ ascending: !this.state.ascending })
+        const order = this.state.ascending;
 
-        // this.setState({
-        //     ["results"]: newResult
-        //   });
+        console.log("by phone")
+          this.setState({
+              ["results"]: this.state.results.sort(function (a, b) {
+                return (order ? (a.phone - b.phone) : (b.phone - a.phone));
+              })
+          })
+      }
 
-        // console.log(newResult)
+    sortByName = () => {
+        this.setState({ ascending: !this.state.ascending })
+        const order = this.state.ascending;
 
-        // let newRes = this.state.results.map(user => {
-        //     console.log(user)
-        //     return user;
-        // })
+        console.log("by name")
 
-      
-      };
-    
-    //   // When the form is submitted, search the Giphy API for `this.state.search`
-    //   handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     this.searchGiphy(this.state.search);
-    //   };
+        this.setState({
+            ["results"]: this.state.results.sort(
+                function (a, b) {
+                    var x = a.name.first.toUpperCase(); // ignore upper and lowercase
+                    var y = b.name.last.toUpperCase(); // ignore upper and lowercase
 
-    render(){
+                    return (order ? (x < y ? 1 : x > y ? -1 : 0) : (x < y ? -1 : x > y ? 1 : 0));
+                })
+        })
+    }
+
+
+    sortByEmail = () => {
+        this.setState({ ascending: !this.state.ascending })
+        const order = this.state.ascending;
+
+        console.log("by email")
+
+        this.setState({
+            ["results"]: this.state.results.sort(
+                function (a, b) {
+                    var x = a.email.toUpperCase(); // ignore upper and lowercase
+                    var y = b.email.toUpperCase(); // ignore upper and lowercase
+
+                    return (order ? (x < y ? 1 : x > y ? -1 : 0) : (x < y ? -1 : x > y ? 1 : 0));
+                })
+        })
+    }
+
+
+    render() {
 
         return (
             <article>
-                <Header 
-                search={this.state.search}
-                // handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}
+                <Header
+                    search={this.state.search}
+                    // handleFormSubmit={this.handleFormSubmit}
+                    handleInputChange={this.handleInputChange}
                 />
-                <Directory results={this.state.results} search={this.state.search} />
+                <Directory
+                    results={this.state.results}
+                    search={this.state.search}
+                    sortByEmail={this.sortByEmail}
+                    sortByName={this.sortByName}
+                    sortByPhone={this.sortByPhone}
+                // sort={this.state.sort} 
+                />
             </article>
         );
     }
-    
+
 }
 
 export default App;
