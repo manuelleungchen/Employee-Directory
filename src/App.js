@@ -26,13 +26,20 @@ class App extends Component {
           .catch(err => console.log(err));
       };
     
-    //   handleInputChange = event => {
-    //     const name = event.target.name;
-    //     const value = event.target.value;
-    //     this.setState({
-    //       [name]: value
-    //     });
-    //   };
+      handleInputChange = event => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+          [name]: value
+        });
+
+        let newRes = this.state.results.map(user => {
+            console.log(user)
+            return user;
+        })
+
+      
+      };
     
     //   // When the form is submitted, search the Giphy API for `this.state.search`
     //   handleFormSubmit = event => {
@@ -44,7 +51,11 @@ class App extends Component {
 
         return (
             <article>
-                <Header />
+                <Header 
+                search={this.state.search}
+                // handleFormSubmit={this.handleFormSubmit}
+                handleInputChange={this.handleInputChange}
+                />
                 <Directory results={this.state.results}/>
             </article>
         );

@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function Header() {
+function Header(props) {
 
     return (
         <nav>
@@ -10,10 +10,20 @@ function Header() {
                 <p>CLick on headings to apply filters or use searchbar to narrow results</p>
             </section>
             <section id="searchbar">
-                <input type="search" id="form1" className="form-control" placeholder="Search by Name" />
+                <input 
+                onChange={props.handleInputChange}
+                value={props.search}
+                name="search"
+                type="text" 
+                id="search" 
+                className="form-control"
+                placeholder="Search by Name"
+                
+                />
             </section>
         </nav>
     )
 }
+
 
 export default Header;
