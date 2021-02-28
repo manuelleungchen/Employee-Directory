@@ -3,19 +3,22 @@ import "./style.css";
 
 function Directory(props) {
 
-    let users = props.results.map(user => {
+    let users = props.results.filter(user => {
+        const fullname = user.name.first + user.name.last;
+        return fullname.toLowerCase().includes(props.search.toLowerCase())
+    }).map(user => {
         let phone = user.phone.replace(/\D/g, "")
 
-        if(phone === null) {
+        if (phone === null) {
             phone = user.phone
         }
-    
+
         // else{
         //     phone = phone.match(/^(\d{3})(\d{3})(\d{4})$/)
         // }
-       
+
         let dob = user.dob.date.match(/(.{10})/)[0]
-        
+
         return (
             <section className="row" id="row" key={user.cell}>
                 <img className="col-2" src={user.picture.medium} alt={user.picture.thumbnail}></img>

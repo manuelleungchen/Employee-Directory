@@ -29,14 +29,28 @@ class App extends Component {
       handleInputChange = event => {
         const name = event.target.name;
         const value = event.target.value;
+        console.log(name)
+        console.log(value)
+
         this.setState({
           [name]: value
         });
 
-        let newRes = this.state.results.map(user => {
-            console.log(user)
-            return user;
-        })
+        // let newResult = this.state.results.filter(user => 
+        //     user.name.first.includes(this.state.search)
+        //     // console.log(user.name.first.includes("a"))
+        // )
+
+        // this.setState({
+        //     ["results"]: newResult
+        //   });
+
+        // console.log(newResult)
+
+        // let newRes = this.state.results.map(user => {
+        //     console.log(user)
+        //     return user;
+        // })
 
       
       };
@@ -56,7 +70,7 @@ class App extends Component {
                 // handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange}
                 />
-                <Directory results={this.state.results}/>
+                <Directory results={this.state.results} search={this.state.search} />
             </article>
         );
     }
